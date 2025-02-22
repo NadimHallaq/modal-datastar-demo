@@ -43,8 +43,15 @@ func main() {
 
 		sse := datastar.NewSSE(w, r)
 
-		sse.MergeFragmentTempl(views.Modal(currency_code), datastar.WithMergeMode("inner"), datastar.WithSelector("#modal"))
-		sse.MergeFragments(`<div id="overlay" data-show="$open" class="fixed inset-0 flex items-end justify-center bg-black/20"></div>`)
+		sse.MergeFragmentTempl(views.Modal(currency_code), datastar.WithMergeMode("morph"), datastar.WithSelector("#modal-form"))
+		sse.MergeFragments(`<div id="overlay" class="fixed inset-0 flex items-end justify-center bg-black/20"></div>`)
+	})
+
+	r.Get("/hide-modal", func(w http.ResponseWriter, r *http.Request) {
+		sse := datastar.NewSSE(w, r)
+
+		sse.MergeFragments(`<div id="modal-form"></div>`)
+		sse.MergeFragments(`<div id="overlay"></div>`)
 	})
 
 	http.ListenAndServe(":8080", r)
