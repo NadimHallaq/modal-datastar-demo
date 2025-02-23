@@ -43,7 +43,7 @@ func main() {
 
 		sse := datastar.NewSSE(w, r)
 
-		sse.MergeFragmentTempl(views.Modal(currency_code), datastar.WithMergeMode("morph"), datastar.WithSelector("#modal-form"))
+		sse.MergeFragmentTempl(views.Modal(currency_code))
 		sse.MergeFragments(`<div id="overlay" class="fixed inset-0 flex items-end justify-center bg-black/20"></div>`)
 	})
 
